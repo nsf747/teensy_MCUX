@@ -1,0 +1,2 @@
+led_blinky.c:37:6:SysTick_DelayTicks	24	static
+led_blinky.c:47:5:main	16	static

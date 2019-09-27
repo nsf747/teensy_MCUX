@@ -1,0 +1,5 @@
+board.c:24:10:BOARD_DebugConsoleSrcFreq	8	static
+board.c:43:6:BOARD_InitDebugConsole	8	static
+board.c:287:6:BOARD_ConfigMPU	16	static
+board.c:407:6:BOARD_SD_Pin_Config	0	static
+board.c:440:6:BOARD_MMC_Pin_Config	0	static

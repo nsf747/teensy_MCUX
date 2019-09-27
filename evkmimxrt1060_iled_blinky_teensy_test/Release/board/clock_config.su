@@ -1,0 +1,5 @@
+fsl_clock.h:982:20:CLOCK_SetMux	12	static
+fsl_clock.h:1019:20:CLOCK_SetDiv	12	static
+fsl_clock.h:1082:20:CLOCK_DisableClock	8	static
+clock_config.c:162:6:BOARD_BootClockRUN	16	static
+clock_config.c:42:6:BOARD_InitBootClocks	0	static
