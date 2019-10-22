@@ -1,0 +1,6 @@
+ethernet_lib.c:26:10:LPSPI4_GetFreq	8	static
+ethernet_lib.c:31:6:_delay_ms	24	static
+ethernet_lib.c:39:6:LPSPI_MasterSignalEvent_t	16	static
+ethernet_lib.c:56:6:SPI_Write	16	static
+ethernet_lib.c:82:15:SPI_Read	16	static
+ethernet_lib.c:108:6:W5100_Init	72	static

@@ -1,0 +1,24 @@
+
+    /* Provide basic symbols giving location and size of main text
+     * block, including initial values of RW data sections. Note that
+     * these will need extending to give a complete picture with
+     * complex images (e.g multiple Flash banks).
+     */
+    _itcm_size = SIZEOF(.text) + SIZEOF(.ARM.extab) + SIZEOF(.ARM.exidx) + SIZEOF(.data) + SIZEOF(.bss) + SIZEOF(.noinit_RAM); 
+	_itcm_start = ORIGIN(SRAM_ITC);
+	_itcm_end = _itcm_start + _itcm_size;
+	_itcm_loadstart = LOADADDR(.text);
+    _itcm_block_count = (_itcm_size + 0x7FFE) >> 15; 
+       /* _itcm_block_count = (_itcm_size + 0x7FFF)>>15;*/
+        _flexram_bank_config = (0xAAAAAAAA)|((1<<(_itcm_block_count * 2)) - 1);
+    _image_start = LOADADDR(.text);
+    _image_end = LOADADDR(.data) + SIZEOF(.data);
+    _image_size = _image_end - _image_start;
+   
+    /* Here we lend and adapt some of the T4s linking logic for our purposes. Use "image_size.ldt" for
+         * this. */
+	/* WARNING: requires heap and stack:
+	 *    1) configured post-data
+	 *    2) configured small enough to fit into the DTCM what is left over after ITCM bank reservation
+	 */
+	
