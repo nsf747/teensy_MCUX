@@ -124,54 +124,42 @@ int main(void)
 
     /*Set clock source for LPSPI*/
 
-    PRINTF("LPSPI CMSIS driver board to board interrupt example.\r\n");
-    PRINTF("This example use one board as master and another as slave.\r\n");
-    PRINTF("Master and slave uses interrupt way. Slave should start first. \r\n");
+    PRINTF("Example for WizNet W5x00 Ethernet chip with ethernet API\r\n");
     PRINTF("Please make sure you make the correct line connection. Basically, the connection is: \r\n");
-    PRINTF("LPSPI_master -- LPSPI_slave   \r\n");
-    PRINTF("   CLK       --    CLK  \r\n");
-    PRINTF("   PCS       --    PCS \r\n");
-    PRINTF("   SOUT      --    SIN  \r\n");
-    PRINTF("   SIN       --    SOUT \r\n");
-    PRINTF("   GND       --    GND \r\n");
+    PRINTF("Teensy 		--     W5x00  \r\n");
+    PRINTF("   13       --     CLK  \r\n");
+    PRINTF("   10       --     PCS \r\n");
+    PRINTF("   11       --     SIN  \r\n");
+    PRINTF("   12       --     SOUT \r\n");
+    PRINTF("   GND      --     GND \r\n");
 
-    /*uint32_t errorCount;
-    uint32_t loopCount = 1;
-    uint32_t i;*/
+
     GPIO_PinWrite(GPIO2, 00U, 1U);
+
     /*LPSPI master init*/
     DRIVER_MASTER_SPI.Initialize(LPSPI_MasterSignalEvent_t);
     DRIVER_MASTER_SPI.PowerControl(ARM_POWER_FULL);
     DRIVER_MASTER_SPI.Control(ARM_SPI_MODE_MASTER, TRANSFER_BAUDRATE);
     PRINTF("%d",wizchip_init(NULL,NULL));
+
     // register chip select and SPI callback functions
-        reg_wizchip_cs_cbfunc(NULL,NULL);
-        reg_wizchip_spi_cbfunc(NULL,NULL);
-        _delay_ms(100);
+	reg_wizchip_cs_cbfunc(NULL,NULL);
+	reg_wizchip_spi_cbfunc(NULL,NULL);
+	_delay_ms(100);
     PRINTF("Wizchip init\n");
-        // initialise W5500
-        PRINTF("%d\n",wizchip_init(NULL, NULL));
-            /*masterTxData[0]=0xf0;
-            masterTxData[1]=0x00;
 
-            	masterTxData[2]=0x00;
-            	masterTxData[3]=0x80;
-            	setintflags();
-            	GPIO_PinWrite(GPIO2, 00U, 0U);
-            	DRIVER_MASTER_SPI.Transfer(masterTxData,masterRxData, 4U );
-            	waitfortransfer();
-            	GPIO_PinWrite(GPIO2, 00U, 1U);*/
+    // initialise W5100
+	PRINTF("%d\n",wizchip_init(NULL, NULL));
 
-        PRINTF("Wizchip set info\n");
-        wizchip_setnetinfo(&net_info);
-        //PRINTF("Reading SAR: %.2x:%.2x:%.2x:%.2x:%.2x:%.2x\n\n",recMAC[0],recMAC[1],recMAC[2],recMAC[3],recMAC[4],recMAC[5]);
-        //_delay_ms(100);
-        // initialise DHCP on socket 0
-        dhcp_timer_enable();
-        PRINTF("DHCP Init\n");
-        DHCP_init(0, messagebuf);
-        PRINTF("DHCP Run\n");
-        _delay_ms(250);
+	PRINTF("Wizchip set info\n");
+	wizchip_setnetinfo(&net_info);
+
+	// initialise DHCP on socket 0
+	dhcp_timer_enable();
+	PRINTF("DHCP Init\n");
+	DHCP_init(0, messagebuf);
+	PRINTF("DHCP Run\n");
+	_delay_ms(250);
 
 
 
@@ -179,28 +167,32 @@ int main(void)
     {
     	loop_counter++;
     	PRINTF("%d\n\n",loop_counter);
-    	switch (DHCP_run()) {
-    	                case DHCP_IP_ASSIGN:
-    	                    PRINTF("IP assigned\n");
-    	                    getIPfromDHCP(ipaddr);
-    	                    PRINTF("%d.%d.%d.%d\n",ipaddr[0],ipaddr[1],ipaddr[2],ipaddr[3]);
+    	switch (DHCP_run())
+    	{
+			case DHCP_IP_ASSIGN:
+				PRINTF("IP assigned\n");
+				getIPfromDHCP(ipaddr);
+				PRINTF("%d.%d.%d.%d\n",ipaddr[0],ipaddr[1],ipaddr[2],ipaddr[3]);
+				break;
 
-    	                    break;
-    	                case DHCP_IP_CHANGED:
-    	                	PRINTF("IP changed\n");
-    	                    break;
-    	                case DHCP_IP_LEASED:
-    	                    PRINTF("IP Leased");
-    	                    getIPfromDHCP(ipaddr);
-    	                    PRINTF("%d.%d.%d.%d\n",ipaddr[0],ipaddr[1],ipaddr[2],ipaddr[3]);
-    	                    break;
-    	                case DHCP_FAILED:
-    	                	PRINTF("DHCP failed\n");
-    	                    break;
-    	                default:
-    	                	PRINTF("DHCP unknown\n");
-    	                    break;
-    	            }
+			case DHCP_IP_CHANGED:
+				PRINTF("IP changed\n");
+				break;
+
+			case DHCP_IP_LEASED:
+				PRINTF("IP Leased");
+				getIPfromDHCP(ipaddr);
+				PRINTF("%d.%d.%d.%d\n",ipaddr[0],ipaddr[1],ipaddr[2],ipaddr[3]);
+				break;
+
+			case DHCP_FAILED:
+				PRINTF("DHCP failed\n");
+				break;
+
+			default:
+				PRINTF("DHCP unknown\n");
+				break;
+		}
     	_delay_ms(100);
     }
 }
