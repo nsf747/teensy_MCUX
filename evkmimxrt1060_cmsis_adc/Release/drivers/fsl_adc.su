@@ -1,0 +1,10 @@
+fsl_clock.h:1055:20:CLOCK_ControlGate	12	static
+fsl_adc.c:64:6:ADC_Init	16	static
+fsl_adc.c:114:6:ADC_Deinit	0	static
+fsl_adc.c:142:6:ADC_GetDefaultConfig	8	static
+fsl_adc.c:189:6:ADC_SetChannelConfig	0	static
+fsl_adc.c:224:10:ADC_DoAutoCalibration	0	static
+fsl_adc.c:284:6:ADC_SetOffsetConfig	0	static
+fsl_adc.c:311:6:ADC_SetHardwareCompareConfig	0	static
+fsl_adc.c:358:6:ADC_SetHardwareAverageConfig	0	static
+fsl_adc.c:381:6:ADC_ClearStatusFlags	0	static

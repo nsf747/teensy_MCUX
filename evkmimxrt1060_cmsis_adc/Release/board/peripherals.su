@@ -1,0 +1,3 @@
+peripherals.c:97:6:LPUART_1_init	0	static
+peripherals.c:104:6:BOARD_InitPeripherals	0	static
+peripherals.c:113:6:BOARD_InitBootPeripherals	0	static
