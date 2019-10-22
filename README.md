@@ -6,7 +6,7 @@ These codes are examples for the i.MX RT 1060 Eval board modified to run on teen
 
 Details related to the modifications are posted on the pjrc forum. 
 
-Link:https://forum.pjrc.com/threads/57568-Teensy-4-compatible-hex-files-using-MCUXpresso-IDE?
+Link: https://forum.pjrc.com/threads/57568-Teensy-4-compatible-hex-files-using-MCUXpresso-IDE?
 
 ## Example codes
 
